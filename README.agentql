@@ -1,0 +1,17 @@
+namespace agennext.agent_commit.readme
+
+vocabulary commit_governance {
+  term agent_deploy_validation means "Agent-Commit consumes validation from Agent-deploy" maps to commit.validation.owner
+  term edge_validation means "Validation runs on the user's browser or client before server submission" maps to commit.validation.edge
+  term same_language_loop means "AgentQL is used for governance source to reduce semantic conversion and hallucination risk" maps to commit.documentation.same_language_loop
+}
+
+constitution AgentCommitReadme {
+  rule owns_commit_flow: "Agent-Commit owns commit, branch, pull request, and merge preparation for AGenNext repositories."
+  rule does_not_own_rules: "Agent-Commit does not define governance rules."
+  rule consumes_agent_deploy: "Agent-Commit must consume Agent-deploy validation before commit, pull request, merge, promotion, or release preparation."
+  rule attach_evidence: "Validation evidence must be attached to commits or pull requests."
+  rule browser_typescript_only: "Outside SurrealDB, SurrealQL, SurrealML, and AgentQL, the only approved implementation language is browser-side TypeScript."
+  rule single_fe_language: "TypeScript is the single FE/UI language to avoid code conversion and keep browser authoring, validation, and execution in one toolchain."
+  rule readme_agentql_source: "README content is authored in AgentQL first and Markdown is a human-readable projection."
+}
