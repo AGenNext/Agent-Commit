@@ -1,0 +1,18 @@
+namespace agennext.agent_commit.agents
+
+vocabulary agent_commit_instructions {
+  term centralized_governance means "Agent-deploy owns the editable governance rules" maps to commit.agent.centralized_governance
+  term quorum_consensus means "Design and language changes require quorum consensus" maps to governance.quorum
+  term same_language_loop means "Agents read, validate, write, and present governance meaning in AgentQL to reduce hallucination risk" maps to governance.same_language_loop
+}
+
+constitution AgentCommitInstructions {
+  rule no_rule_duplication: "Agent-Commit must not duplicate governance rules."
+  rule consume_agent_deploy: "Rules are owned by Agent-deploy and consumed from AGenNext/Agent-deploy/governance."
+  rule validate_before_commit: "Before commit, pull request, merge, promotion, or release preparation, Agent-Commit must run Agent-deploy validation against the target repository and attach the result as evidence."
+  rule client_first: "Validation must run on the user's client before changes are accepted by AGenNext servers."
+  rule edge_first: "Edge validation is the first boundary; server-side validation is verification and audit."
+  rule browser_typescript_only: "Outside SurrealDB, SurrealQL, SurrealML, and AgentQL, the only approved implementation language is browser-side TypeScript."
+  rule design_change_quorum: "Any design change, architecture deviation, grammar change, vocabulary change, ontology change, taxonomy change, naming change, or semantic-model change requires quorum consensus before implementation."
+  rule same_language_hallucination_control: "When an agent reads and presents in the same language, hallucination risk is minimized."
+}
